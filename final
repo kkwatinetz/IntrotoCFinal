@@ -1,0 +1,79 @@
+/*   NAME OF STUDENTS:
+	 Katie Kwatinetz
+	 Lanaiya Walters
+	 Jimmy Winchester
+*/
+
+#include<stdlib.h>
+#include<stdio.h>
+#include<string.h>
+
+/*
+Student is characterized with:
+-	Full name : String
+-	ID: String
+-	Gpa: float
+-	Number of credit hours currently taken: int
+
+typedef struct
+{
+    int id;
+    char name[40];
+
+} student;
+
+Faculty class has:
+-	Full name: String
+-	ID: String
+-	Department (math, cs or science are the only departments we are considering in this project)
+-	Rank (professor and adjunct are the only ranks we are considering in this project)
+
+typedef struct
+{
+    int id;
+    char name[40];
+
+} faculty;
+
+*/
+
+
+/*
+
+Choose one of the options:
+1-	Add a new faculty member
+2-	Add a new student
+3-	Print tuition invoice for a student
+4-	Print information of a faculty
+5-	Exit Program
+*/
+
+
+int  abc (\* . . . */ );
+void xyz(\* . . . */ );
+int  menu ();
+
+
+  int  abc (\* parameters… */ )
+{
+
+}
+
+
+void xyz(\* parameters… */ )
+{
+
+}
+
+int  menu ()
+{
+    int  option;
+
+
+   	return option;
+}
+
+int main()
+{
+    return 0;
+}
