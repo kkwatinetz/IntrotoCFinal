@@ -1,79 +1,174 @@
 /*   NAME OF STUDENTS:
 	 Katie Kwatinetz
-	 Lanaiya Walters
+	 Lanayia Walters
 	 Jimmy Winchester
 */
+
 
 #include<stdlib.h>
 #include<stdio.h>
 #include<string.h>
 
-/*
-Student is characterized with:
--	Full name : String
--	ID: String
--	Gpa: float
--	Number of credit hours currently taken: int
 
 typedef struct
 {
-    int id;
-    char name[40];
+    char name[50];
+    char id[25];
+    float gpa;
+    int creditHours;
 
 } student;
 
-Faculty class has:
--	Full name: String
--	ID: String
--	Department (math, cs or science are the only departments we are considering in this project)
--	Rank (professor and adjunct are the only ranks we are considering in this project)
-
 typedef struct
 {
-    int id;
-    char name[40];
+    char name[50];
+    char id[25];
+    char department[10];
+    char rank[10];
 
 } faculty;
 
-*/
 
+int menu();
+void addNewFaculty(faculty array[], faculty acc);
+void addNewStudent(student array[], student acc);
+void printTuitionInvoice(student array[]);
+void printFacultyInfo(faculty array[]);
 
-/*
+int menu() {
+    int option;
+    int firsttime = 1;
 
-Choose one of the options:
-1-	Add a new faculty member
-2-	Add a new student
-3-	Print tuition invoice for a student
-4-	Print information of a faculty
-5-	Exit Program
-*/
+    do {
+        if (firsttime != 1) {
+            printf("Sorry.....Invalid Option. Try again.\n\n ");
+        }
+        printf("Choose one of the following options: \n");
+        printf("1 - Add a new faculty member\n");
+        printf("2 - Add a new student\n");
+        printf("3 - Print tuition invoice for a student\n");
+        printf("4 - Print information of a faculty member\n");
+        printf("0 - Exit Program\n");
+        printf("Enter your selection: ");
+        scanf("%d", &option);
+        firsttime++;
+    } while (option > 6 || option < 0);
 
+    return option;
+}
 
-int  abc (\* . . . */ );
-void xyz(\* . . . */ );
-int  menu ();
-
-
-  int  abc (\* parameters… */ )
+void addNewFaculty(faculty array[], faculty acc)
 {
 
 }
 
-
-void xyz(\* parameters… */ )
+void addNewStudent(student array[], student acc)
 {
 
 }
 
-int  menu ()
+void printTuitionInvoice(student array[])
 {
-    int  option;
 
-
-   	return option;
 }
 
-int main()
+void printFacultyInfo(faculty array[])
 {
+
+}
+
+int main() {
+    faculty programF[30];
+    student programS[100];
+    int option = 1;
+    float gpa;
+    int id;
+    int creditHours;
+    faculty temp;
+    student temp;
+ 
+    
+    while (option != 0) {
+        option = menu();
+
+        switch (option) {
+            case 0:
+                break;
+            case 1:
+                printf("Enter the faculty’s info:\n ");
+                printf("Name of the faculty: ");
+                getchar(); // Clear newline from buffer
+                fgets(temp.name, sizeof(temp.name), stdin);
+                temp.name[strcspn(temp.name, "\n")] = 0; // Remove newline
+
+                printf("ID:  ");
+                getchar(); // Clear newline from buffer
+                fgets(temp.id, sizeof(temp.id), stdin);
+                temp.id[strcspn(temp.id, "\n")] = 0; // Remove newline
+
+                printf("Rank: ");
+                getchar(); // Clear newline from buffer
+                fgets(temp.rank, sizeof(temp.rank), stdin);
+                temp.rank[strcspn(temp.rank, "\n")] = 0; // Remove newline
+                
+                printf("Department: ");
+                getchar(); // Clear newline from buffer
+                fgets(temp.department, sizeof(temp.department), stdin);
+                temp.department[strcspn(temp.department, "\n")] = 0; // Remove newline
+                
+                printf("Thanks! ");
+    
+
+                addNewFaculty(programF, temp);
+                break;
+            case 2:
+                printf("Enter the student’s info:\n ");
+                printf("Name of Student: ");
+                getchar(); // Clear newline from buffer
+                fgets(temp.name, sizeof(temp.name), stdin);
+                temp.name[strcspn(temp.name, "\n")] = 0; // Remove newline
+
+                printf("ID:  ");
+                getchar(); // Clear newline from buffer
+                fgets(temp.id, sizeof(id.name), stdin);
+                temp.id[strcspn(temp.id, "\n")] = 0; // Remove newline
+
+                printf("GPA: ");
+                scanf("%.2f", &student.gpa);
+                
+                printf("Credit hours: ");
+                scanf("%d", &student.creditHours);
+                
+                printf("Thanks! ");
+
+                addNewStudent(programS, temp);
+                break;
+            case 3:
+                printf("Enter the student’s id: ");
+                 scanf("%d", &student.id);
+                
+                
+                printf("Here is the tuition invoice for Julia Alvarez : ");
+        
+                printTuitionInvoice(programS, id);
+                break;
+            case 4:
+                printf(" Enter the faculty’s id: ");
+                getchar(); // Clear newline from buffer
+                fgets(temp.name, sizeof(temp.name), stdin);
+                temp.name[strcspn(temp.name, "\n")] = 0; // Remove newline
+                
+                if(printFacultyInfo(programF,id) == 1)
+                   {
+                       printf("Faculty Found");
+                   }
+                else
+                {
+                    printf("sorry %c does not exist", id);
+                }
+        }
+    }
+
     return 0;
 }
+
