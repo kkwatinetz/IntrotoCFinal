@@ -97,7 +97,7 @@ int main() {
     int id;
     int creditHours;
     faculty temp;
-    student temp;
+    student temp2;
 
 
 
@@ -144,13 +144,13 @@ int main() {
                 printf("Enter the student’s info:\n ");
                 printf("Name of Student: ");
                 getchar(); // Clear newline from buffer
-                fgets(temp.name, sizeof(temp.name), stdin);
-                temp.name[strcspn(temp.name, "\n")] = 0; // Remove newline
+                fgets(temp2.name, sizeof(temp2.name), stdin);
+                temp2.name[strcspn(temp2.name, "\n")] = 0; // Remove newline
 
                 printf("ID:  ");
                 getchar(); // Clear newline from buffer
-                fgets(temp.id, sizeof(id.name), stdin);
-                temp.id[strcspn(temp.id, "\n")] = 0; // Remove newline
+                fgets(temp2.id, sizeof(id.name), stdin);
+                temp2.id[strcspn(temp2.id, "\n")] = 0; // Remove newline
 
                 printf("GPA: ");
                 scanf("%.2f", &student.gpa);
@@ -160,7 +160,7 @@ int main() {
 
                 printf("Thanks! ");
 
-                addNewStudent(programS, temp);
+                addNewStudent(programS, temp2);
                 break;
             case 3:
                 printf("Enter the student’s id: ");
