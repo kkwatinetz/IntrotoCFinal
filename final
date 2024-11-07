@@ -30,7 +30,7 @@ typedef struct
 
 
 int menu();
-void addNewFaculty(faculty array[], faculty acc);
+void addNewFaculty(faculty *array, faculty *acc);
 void addNewStudent(student array[], student acc);
 void printTuitionInvoice(student array[]);
 void printFacultyInfo(faculty array[]);
@@ -57,9 +57,21 @@ int menu() {
     return option;
 }
 
-void addNewFaculty(faculty array[], faculty acc)
+void addNewFaculty(faculty *array, faculty *acc)
 {
+int index;
+    for (index = 0; index < 1000; index++) {
+        if ((array + index)->id == 0) {
+            break;
+        }
+    }
 
+    if (index < 30) {
+        strcpy((array + index)->name, acc->name);
+        strcpy((array + index)->rank, acc->rank);
+        strcpy((array + index)->department, acc->department);
+        strcpy((array + index)->id, acc->id);
+    }
 }
 
 void addNewStudent(student array[], student acc)
@@ -86,8 +98,15 @@ int main() {
     int creditHours;
     faculty temp;
     student temp;
- 
-    
+
+
+
+    for (int i = 0; i < 30; i++) { //initializing all faculty id's to 0 to check for empty spots later
+    programF[i].id = 0;
+    }
+
+
+
     while (option != 0) {
         option = menu();
 
@@ -110,14 +129,14 @@ int main() {
                 getchar(); // Clear newline from buffer
                 fgets(temp.rank, sizeof(temp.rank), stdin);
                 temp.rank[strcspn(temp.rank, "\n")] = 0; // Remove newline
-                
+
                 printf("Department: ");
                 getchar(); // Clear newline from buffer
                 fgets(temp.department, sizeof(temp.department), stdin);
                 temp.department[strcspn(temp.department, "\n")] = 0; // Remove newline
-                
+
                 printf("Thanks! ");
-    
+
 
                 addNewFaculty(programF, temp);
                 break;
@@ -135,10 +154,10 @@ int main() {
 
                 printf("GPA: ");
                 scanf("%.2f", &student.gpa);
-                
+
                 printf("Credit hours: ");
                 scanf("%d", &student.creditHours);
-                
+
                 printf("Thanks! ");
 
                 addNewStudent(programS, temp);
@@ -146,10 +165,10 @@ int main() {
             case 3:
                 printf("Enter the student’s id: ");
                  scanf("%d", &student.id);
-                
-                
+
+
                 printf("Here is the tuition invoice for Julia Alvarez : ");
-        
+
                 printTuitionInvoice(programS, id);
                 break;
             case 4:
@@ -157,7 +176,7 @@ int main() {
                 getchar(); // Clear newline from buffer
                 fgets(temp.name, sizeof(temp.name), stdin);
                 temp.name[strcspn(temp.name, "\n")] = 0; // Remove newline
-                
+
                 if(printFacultyInfo(programF,id) == 1)
                    {
                        printf("Faculty Found");
@@ -171,4 +190,3 @@ int main() {
 
     return 0;
 }
-
