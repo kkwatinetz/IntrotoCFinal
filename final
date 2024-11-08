@@ -4,6 +4,7 @@
 	 Jimmy Winchester
 */
 
+
 #include<stdlib.h>
 #include<stdio.h>
 #include<string.h>
@@ -35,8 +36,8 @@ typedef struct
 int menu();
 void setStudents(student array[]);
 void setFaculty(faculty array[]);
-void printStudents(student array[]);
-void printFaculty(faculty array[]);
+void printStudentInvoice(student array[])
+void printFacultyInfo(faculty array[])
 void addNewStudent(student array[], student newStudent);
 void addNewFaculty(faculty *array, faculty *acc);
 float calculateStudentInvoice(student s);
@@ -246,3 +247,4 @@ int main() {
 
     return 0;
 }
+
