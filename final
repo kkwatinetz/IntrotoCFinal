@@ -134,12 +134,12 @@ int validateDepartment(char department[])
 
 }
 
-int validateRank(char rank[]);
+int validateRank(char rank[])
 {
 
 }
 
-int validateId(char id[]);
+int validateId(char id[])
 {
 
 }
