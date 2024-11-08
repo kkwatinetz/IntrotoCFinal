@@ -36,8 +36,8 @@ typedef struct
 int menu();
 void setStudents(student array[]);
 void setFaculty(faculty array[]);
-void printStudentInvoice(student array[])
-void printFacultyInfo(faculty array[])
+void printStudentInvoice(student array[]);
+void printFacultyInfo(faculty array[]);
 void addNewStudent(student array[], student newStudent);
 void addNewFaculty(faculty *array, faculty *acc);
 float calculateStudentInvoice(student s);
@@ -200,51 +200,77 @@ int main() {
                 strcpy(newFaculty.department, tempDept);
 
 
-                addNewFaculty(facultyMembers, newFaculty);
+                //addNewFaculty(facultyMembers, newFaculty);
 
 
                 printf("Thanks! ");
 
                 break;
             case 2:
-                student temps;
+                printf("Enter student's info:\n ");
 
-                printf("Enter the student’s info:\n");
-                printf("Name of Student: ");
-
+                printf("Name of student: ");
+                getchar();  // To consume newline
+                fgets(newStudent.name, sizeof(newStudent.name), stdin);
+                newStudent.name[strcspn(newStudent.name, "\n")] = 0;
 
                 printf("ID: ");
+                scanf("%s", tempId);
+                if (!validateId(tempId)) {
+                    printf("Invalid ID format\n");
+                    break;
+                }
+                strcpy(newStudent.id, tempId);
+
 
                 printf("GPA: ");
-                scanf("%f", &tempStudent.gpa);
+                scanf("%f", &tempGpa);
+                newStudent.gpa = tempGpa;
 
                 printf("Credit hours: ");
-                scanf("%d", &tempStudent.creditHours);
+                scanf("%d", &tempCredits);
+                newStudent.creditHours = tempCredits;
+
+                addNewStudent(students, newStudent);
 
                 printf("Thanks! ");
 
-                //addNewStudent();
                 break;
             case 3:
                 printf("Enter the student’s ID: ");
-                printf("Here is the tuition invoice for %c : \n");
-                printf("Sorry-student not found!\n");
+                scanf("%s", tempId);
 
+                if (!validateId(tempId)) {
+                    printf("Sorry-student not found!\n");
+                    break;
+                }
+                else
+                {
+                    strcpy(newStudent.id, tempId);
+                    printf("Here is the tuition invoice for %c : \n");
+                    printStudentInvoice(student array[]);
 
-                //printTuitionInvoice();
+                }
+
                 break;
             case 4:
                 printf("Enter the faculty’s ID: ");
+                scanf("%s", tempId);
 
-                printf("Faculty found!\n");
-                printf("Sorry, faculty with ID %s does not exist.\n");
+                if (!validateId(tempId)) {
+                    printf("Sorry, faculty with ID %s does not exist.\n",tempId);
+                    break;
+                }
+                else
+                {
+                    strcpy(newFaculty.id, tempId);
+                    printf("Faculty found!\n");
+                    printStudentInvoice(faculty array[]);
 
-
-                //printFaculty();
+                }
 
         }
     }
 
     return 0;
 }
-
