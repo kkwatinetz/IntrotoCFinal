@@ -104,6 +104,16 @@ void printFacultyInfo(faculty array[])
 
 void addNewStudent(student array[], student newStudent)
 {
+int i;
+
+    for (i = 0; i < MAX_STUDENTS; i++){
+        if (array[i].id == 0){
+            strcpy(array[i].name, newStudent.name);
+            strcpy(array[i].id, newStudent.id);
+            array[i].gpa = newStudent.gpa;
+            array[i].creditHours = newStudent.creditHours;
+        }
+    }
 
 }
 
@@ -126,8 +136,16 @@ int index;
 
 float calculateStudentInvoice(student s)
 {
+float total;
 
+    total = (s.creditHours * 236.45) + 52;
 
+    if (s.gpa >= 3.85){
+        total = total - (0.25 * total);
+    }
+    
+    
+    return total;
 }
 int validateDepartment(char department[])
 {
