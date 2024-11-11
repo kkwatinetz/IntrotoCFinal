@@ -5,9 +5,10 @@
 */
 
 
-#include<stdlib.h>
-#include<stdio.h>
-#include<string.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
 
 #define MAX_STUDENTS 100
@@ -33,17 +34,22 @@ typedef struct
 } faculty;
 
 
-int menu();
 void setStudents(student array[]);
 void setFaculty(faculty array[]);
 void printStudentInvoice(student array[]);
 void printFacultyInfo(faculty array[]);
 void addNewStudent(student array[], student newStudent);
 void addNewFaculty(faculty *array, faculty *acc);
+void sortByFName(faculty array[]);
+void sortByDepartment(faculty array[]);
+void sortByRank(faculty array[]);
+void sortBySName(student array[]);
+void sortByGPA(student array[]);
 float calculateStudentInvoice(student s);
 int validateDepartment(char department[]);
 int validateRank(char rank[]);
 int validateId(char id[]);
+int menu();
 
 
 int menu() {
@@ -74,7 +80,7 @@ void setStudents(student array[])
     for (int i = 0; i < MAX_STUDENTS; i++)
     {
         strcpy(array[i].name, "ZZZZZZZZZZZZZ");
-        strcpy(array[i].id, "00000000");
+        strcpy(array[i].id, "ZZ000000");
         array[i].gpa = 0.0;
         array[i].creditHours = 0;
     }
@@ -85,19 +91,19 @@ void setFaculty(faculty array[])
     for (int i = 0; i < MAX_FACULTY; i++)
     {
         strcpy(array[i].name, "ZZZZZZZZZZZZZ");
-        strcpy(array[i].id, "00000000");
+        strcpy(array[i].id, "ZZ000000");
         strcpy(array[i].department, "NONE");
         strcpy(array[i].rank, "NONE");
     }
 }
 
-void printStudentInvoice(student array[])
+void printStudentInvoice(student array[], student id)
 {
 
 }
 
 
-void printFacultyInfo(faculty array[])
+void printFacultyInfo(faculty array[], faculty id)
 {
 
 }
@@ -107,7 +113,8 @@ void addNewStudent(student array[], student newStudent)
 int i;
 
     for (i = 0; i < MAX_STUDENTS; i++){
-        if (array[i].id == 0){
+        if (strcmp(array[i].id, "ZZ000000") == 0)
+        {
             strcpy(array[i].name, newStudent.name);
             strcpy(array[i].id, newStudent.id);
             array[i].gpa = newStudent.gpa;
@@ -119,7 +126,7 @@ int i;
 
 void addNewFaculty(faculty *array, faculty *acc)
 {
-int index;
+    int index;
     for (index = 0; index < 1000; index++) {
         if ((array + index)->id == 0) {
             break;
@@ -136,29 +143,117 @@ int index;
 
 float calculateStudentInvoice(student s)
 {
-float total;
+    float total;
 
     total = (s.creditHours * 236.45) + 52;
 
     if (s.gpa >= 3.85){
         total = total - (0.25 * total);
     }
-    
-    
+
+
     return total;
 }
+
 int validateDepartment(char department[])
 {
+    if(strcmp(department, "MATH") == 0 || strcmp(department, "CS") == 0 || strcmp(department, "SCIENCE") == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 
 }
 
 int validateRank(char rank[])
 {
+    if(strcmp(rank, "PROFESSOR") == 0 || strcmp(rank, "ADJUNCT") == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 
 }
 
 int validateId(char id[])
 {
+
+
+}
+
+void sortByFName(faculty array[])
+{
+    faculty temp;
+    for (int j = 0; j < MAX_FACULTY - 1; j++) {
+        for (int i = 0; i < MAX_FACULTY - j - 1; i++) {
+            if (strcmp(array[i].name, array[i + 1].name) > 0) { // Ascending order
+                temp = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = temp;
+            }
+        }
+    }
+}
+void sortByDepartment(faculty array[])
+{
+    faculty temp;
+    for (int j = 0; j < MAX_FACULTY - 1; j++) {
+        for (int i = 0; i < MAX_FACULTY - j - 1; i++) {
+            if (strcmp(array[i].department, array[i + 1].department) > 0) { // Ascending order
+                temp = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = temp;
+            }
+        }
+    }
+
+}
+void sortByRank(faculty array[])
+{
+    faculty temp;
+    for (int j = 0; j < MAX_FACULTY - 1; j++) {
+        for (int i = 0; i < MAX_FACULTY - j - 1; i++) {
+            if (strcmp(array[i].rank, array[i + 1].rank) > 0) { // Ascending order
+                temp = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = temp;
+            }
+        }
+    }
+
+}
+void sortBySName(student array[])
+{
+    student temp;
+    for (int j = 0; j < MAX_STUDENTS - 1; j++) {
+        for (int i = 0; i < MAX_STUDENTS - j - 1; i++) {
+            if (strcmp(array[i].name, array[i + 1].name) > 0) { // Ascending order
+                temp = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = temp;
+            }
+        }
+    }
+
+}
+void sortByGPA(student array[])
+{
+    student temp;
+    for (int j = 0; j < MAX_STUDENTS - 1; j++) {
+        for (int i = 0; i < MAX_STUDENTS - j - 1; i++) {
+            if (strcmp(array[i].gpa, array[i + 1].gpa) > 0) { // Ascending order
+                temp = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = temp;
+            }
+        }
+    }
 
 }
 
@@ -175,12 +270,62 @@ int main() {
     char tempId[9];
     float tempGpa, tempInvoice;
     int tempCredits;
+    char printReport;
+    char sortFaculty;
+    char sortStudent;
 
     while (option != 5) {
         option = menu();
 
         switch (option) {
-            case 0:
+            case 5:
+                printf("Would you like to print the final report (Y/N): ");
+                scanf("%c", &printReport);
+                toUpperCase(printReport);
+                if(strcmp(printReport, "Y"))
+                {
+                    printf("Enter\n")
+                    printf("N or n to sort the faculty by name\n")
+                    printf("D or d to sort the faculty by department\n")
+                    printf("R or r to sort the faculty by rank");
+                    scanf("%c", &sortFaculty);
+                    toUpper(sortFaculty);
+                    if(strcmp(sortFaculty, "N"))
+                    {
+                        sortByFName(faculty facultyMembers);
+                    }
+                    else if(strcmp(sortFaculty, "D"))
+                    {
+                        sortByDepartment(faculty facultyMembers);
+                    }
+                    else if(strcmp(sortFaculty, "R"))
+                    {
+                        sortByRank(faculty facultyMembers);
+                    }
+
+                    printf("Enter\n")
+                    printf("N or n to sort the students by name\n")
+                    printf("G or g to sort the students by gpa\n")
+                    scanf("%c", &sortStudent);
+                    toUpper(sortStudent);
+                    if(strcmp(sortStudent, "N"))
+                    {
+                        sortBySName(student students);
+                    }
+                    else if(strcmp(sortStudent, "D"))
+                    {
+                        sortByGPA(student students);
+                    }
+
+
+                    printf(faculty facultyMembers);
+                    printf(student students);
+                    
+                    printf("Thank you for using PerPro. Goodbye!\n");
+                else
+                {
+                    printf("Thank you for using PerPro. Goodbye!\n");
+                }
                 break;
             case 1:
                 printf("Enter the faculty’s info:\n");
@@ -205,6 +350,7 @@ int main() {
                     printf("Invalid rank\n");
                     break;
                 }
+                toUpperCase(tempRank);
                 strcpy(newFaculty.rank, tempRank);
 
 
@@ -215,10 +361,11 @@ int main() {
                     printf("Invalid department\n");
                     break;
                 }
+                toUpperCase(tempDept);
                 strcpy(newFaculty.department, tempDept);
 
 
-                //addNewFaculty(facultyMembers, newFaculty);
+                addNewFaculty(facultyMembers, newFaculty);
 
 
                 printf("Thanks! ");
@@ -266,7 +413,7 @@ int main() {
                 {
                     strcpy(newStudent.id, tempId);
                     printf("Here is the tuition invoice for %c : \n");
-                    printStudentInvoice(student array[]);
+                    printStudentInvoice(students, newStudent.id);
 
                 }
 
@@ -283,7 +430,7 @@ int main() {
                 {
                     strcpy(newFaculty.id, tempId);
                     printf("Faculty found!\n");
-                    printStudentInvoice(faculty array[]);
+                    printStudentInvoice(faculty, newFaculty.id);
 
                 }
 
