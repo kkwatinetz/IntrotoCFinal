@@ -278,55 +278,6 @@ int main() {
         option = menu();
 
         switch (option) {
-            case 5:
-                printf("Would you like to print the final report (Y/N): ");
-                scanf("%c", &printReport);
-                toUpperCase(printReport);
-                if(strcmp(printReport, "Y"))
-                {
-                    printf("Enter\n")
-                    printf("N or n to sort the faculty by name\n")
-                    printf("D or d to sort the faculty by department\n")
-                    printf("R or r to sort the faculty by rank");
-                    scanf("%c", &sortFaculty);
-                    toUpper(sortFaculty);
-                    if(strcmp(sortFaculty, "N"))
-                    {
-                        sortByFName(faculty facultyMembers);
-                    }
-                    else if(strcmp(sortFaculty, "D"))
-                    {
-                        sortByDepartment(faculty facultyMembers);
-                    }
-                    else if(strcmp(sortFaculty, "R"))
-                    {
-                        sortByRank(faculty facultyMembers);
-                    }
-
-                    printf("Enter\n")
-                    printf("N or n to sort the students by name\n")
-                    printf("G or g to sort the students by gpa\n")
-                    scanf("%c", &sortStudent);
-                    toUpper(sortStudent);
-                    if(strcmp(sortStudent, "N"))
-                    {
-                        sortBySName(student students);
-                    }
-                    else if(strcmp(sortStudent, "D"))
-                    {
-                        sortByGPA(student students);
-                    }
-
-
-                    printf(faculty facultyMembers);
-                    printf(student students);
-                    
-                    printf("Thank you for using PerPro. Goodbye!\n");
-                else
-                {
-                    printf("Thank you for using PerPro. Goodbye!\n");
-                }
-                break;
             case 1:
                 printf("Enter the faculty’s info:\n");
 
@@ -433,9 +384,61 @@ int main() {
                     printStudentInvoice(faculty, newFaculty.id);
 
                 }
+            case 5:
+                printf("Would you like to print the final report (Y/N): ");
+                scanf("%c", &printReport);
+                toUpperCase(printReport);
+                if(strcmp(printReport, "Y"))
+                {
+                    printf("Enter\n")
+                    printf("N or n to sort the faculty by name\n")
+                    printf("D or d to sort the faculty by department\n")
+                    printf("R or r to sort the faculty by rank");
+                    scanf("%c", &sortFaculty);
+                    toUpper(sortFaculty);
+                    if(strcmp(sortFaculty, "N"))
+                    {
+                        sortByFName(faculty facultyMembers);
+                    }
+                    else if(strcmp(sortFaculty, "D"))
+                    {
+                        sortByDepartment(faculty facultyMembers);
+                    }
+                    else if(strcmp(sortFaculty, "R"))
+                    {
+                        sortByRank(faculty facultyMembers);
+                    }
 
-        }
+                    printf("Enter\n")
+                    printf("N or n to sort the students by name\n")
+                    printf("G or g to sort the students by gpa\n")
+                    scanf("%c", &sortStudent);
+                    toUpper(sortStudent);
+                    if(strcmp(sortStudent, "N"))
+                    {
+                        sortBySName(student students);
+                    }
+                    else if(strcmp(sortStudent, "D"))
+                    {
+                        sortByGPA(student students);
+                    }
+
+
+                    printf("------    L I S T   O F   F A C U L T Y  -----");
+                    printf(faculty facultyMembers);
+                    pruntf("------    L I S T   O F   S T  U D E N T S  -----")
+                    printf(student students);
+
+                    printf("Thank you for using PerPro. Goodbye!\n");
+                }
+                else
+                {
+                    printf("Thank you for using PerPro. Goodbye!\n");
+                }
+                break;
+            }
     }
 
     return 0;
 }
+
