@@ -36,8 +36,8 @@ typedef struct
 
 void setStudents(student array[]);
 void setFaculty(faculty array[]);
-void printStudentInvoice(student array[]);
-void printFacultyInfo(faculty array[]);
+void printStudentInvoice(student array[], const char *id);
+void printFacultyInfo(faculty array[], const char *id);
 void addNewStudent(student array[], student newStudent);
 void addNewFaculty(faculty *array, faculty *acc);
 void sortByFName(faculty array[]);
@@ -97,15 +97,55 @@ void setFaculty(faculty array[])
     }
 }
 
-void printStudentInvoice(student array[], student id)
+void printStudentInvoice(student array[], const char *id)
 {
+    int found = 0;
+    for (int i = 0; i < MAX_STUDENTS; i++) {
+        if (strcmp(array[i].id, id) == 0) {
+            found = 1;
+            float totalInvoice = calculateStudentInvoice(array[i]);
 
+            printf("\n-----------------------------------------------\n");
+            printf("Student Name: %s\n", array[i].name);
+            printf("Student ID: %s\n", array[i].id);
+            printf("\nTuition Invoice:\n");
+            printf("Credit Hours: %d\n", array[i].creditHours);
+            printf("Cost per Credit Hour: $236.45\n");
+            printf("Fees: $52.00\n");
+
+            printf("\nTotal Invoice: $%.2f\n", totalInvoice);
+            printf("-----------------------------------------------\n");
+            break;
+        }
+    }
+
+    // If student not found, print error message
+    if (!found) {
+        printf("Sorry, student with ID %s not found.\n", id);
+    }
 }
 
 
-void printFacultyInfo(faculty array[], faculty id)
+void printFacultyInfo(faculty array[], const char *id)
 {
+    int found = 0;
+    for (int i = 0; i < MAX_FACULTY; i++) {
+        if (strcmp(array[i].id, id) == 0) {
+            found = 1;
 
+            printf("\n-----------------------------------------------\n");
+            printf("Faculty Name: %s\n", array[i].name);
+            printf("Faculty ID: %s\n", array[i].id);
+            printf("Department: %s\n", array[i].department);
+            printf("Rank: %s\n", array[i].rank);
+            printf("-----------------------------------------------\n");
+            break;
+        }
+    }
+
+    if (!found) {
+        printf("Sorry, faculty member with ID %s not found.\n", id);
+    }
 }
 
 void addNewStudent(student array[], student newStudent)
@@ -364,7 +404,7 @@ int main() {
                 {
                     strcpy(newStudent.id, tempId);
                     printf("Here is the tuition invoice for %c : \n");
-                    printStudentInvoice(students, newStudent.id);
+                    printStudentInvoice(students, tempId);
 
                 }
 
@@ -374,16 +414,14 @@ int main() {
                 scanf("%s", tempId);
 
                 if (!validateId(tempId)) {
-                    printf("Sorry, faculty with ID %s does not exist.\n",tempId);
+                    printf("Sorry, faculty with ID %s does not exist.\n", tempId);
                     break;
+                    } else {
+                printf("Faculty found!\n");
+                printFacultyInfo(facultyMembers, tempId);  // Correct function to call
                 }
-                else
-                {
-                    strcpy(newFaculty.id, tempId);
-                    printf("Faculty found!\n");
-                    printStudentInvoice(faculty, newFaculty.id);
+                break;
 
-                }
             case 5:
                 printf("Would you like to print the final report (Y/N): ");
                 scanf("%c", &printReport);
@@ -441,4 +479,3 @@ int main() {
 
     return 0;
 }
-
