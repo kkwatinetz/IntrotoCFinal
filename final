@@ -41,8 +41,8 @@ typedef struct
 void setStudents(student array[]);
 void setFaculty(faculty array[]);
 void toUpperCase(char str[]);
-void printStudentInvoice(student array[], const char *id);
-void printFacultyInfo(faculty array[], const char *id);
+int printStudentInvoice(student array[], const char *id);
+int printFacultyInfo(faculty array[], const char *id);
 void addNewStudent(student array[], student newStudent);
 void addNewFaculty(faculty *array, faculty *acc);
 void sortByFName(faculty array[]);
@@ -123,7 +123,7 @@ void toUpperCase(char str[])
 }
 
 //---------------------------------------------------------------------
-void printStudentInvoice(student array[], const char *id)
+int printStudentInvoice(student array[], const char *id)
 {
     int found = 0;
     for (int i = 0; i < MAX_STUDENTS; i++) {
@@ -147,12 +147,13 @@ void printStudentInvoice(student array[], const char *id)
 
     // If student not found, print error message
     if (!found) {
-        printf("Sorry, student with ID %s not found.\n", id);
+        return 0;
     }
+    return 1;
 }
 
 //---------------------------------------------------------------------
-void printFacultyInfo(faculty array[], const char *id)
+int printFacultyInfo(faculty array[], const char *id)
 {
     int found = 0;
     for (int i = 0; i < MAX_FACULTY; i++) {
@@ -170,8 +171,9 @@ void printFacultyInfo(faculty array[], const char *id)
     }
 
     if (!found) {
-        printf("Sorry, faculty member with ID %s not found.\n", id);
+       return 0;
     }
+    return 1;
 }
 
 //---------------------------------------------------------------------
@@ -479,28 +481,47 @@ int main() {
                 break;
 
             case 3:
-                printf("Enter the student’s ID: ");
-                scanf("%s", tempId);
+                 while (1)
+                 {
+                    printf("Enter the student’s ID: ");
+                    scanf("%s", tempId);
 
-                if (!validateId(tempId)) {
-                    printf("Sorry-student not found!\n");
-                    break;
-                } else {
-                    printf("Here is the tuition invoice for %s:\n", tempId);
-                    printStudentInvoice(students, tempId);
+                    if (!validateId(tempId))
+                    {
+                        printf("Invalid ID format. Please try again.\n");
+                    }
+                    else if (!printStudentInvoice(students, tempId))
+                    {
+                            printf("Sorry-student not found! Please try again.\n");
+                    }
+                    else
+                    {
+                        printf("Here is the tuition invoice for %s:\n", tempId);
+                        printStudentInvoice(students, tempId);
+                        break;
+                    }
                 }
                 break;
 
             case 4:
-                printf("Enter the faculty’s ID: ");
-                scanf("%s", tempId);
+                while (1)
+                {
+                    printf("Enter the faculty’s ID: ");
+                    scanf("%s", tempId);
 
-                if (!validateId(tempId)) {
-                    printf("Sorry, faculty with ID %s does not exist.\n", tempId);
-                    break;
-                } else {
-                    printf("Faculty found!\n");
-                    printFacultyInfo(facultyMembers, tempId);
+                    if (!validateId(tempId)) {
+                        printf("Invalid ID format. Please try again.\n");
+                    }
+                    else if (!printFacultyInfo(facultyMembers, tempId))
+                    {
+                        printf("Sorry, faculty with ID %s does not exist. Please try again.\n", tempId);
+                    }
+                    else
+                    {
+                        printf("Faculty found!\n");
+                        printFacultyInfo(facultyMembers, tempId);
+                        break;  // Exit the loop once a valid ID is found
+                    }
                 }
                 break;
 
