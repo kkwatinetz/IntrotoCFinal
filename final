@@ -223,7 +223,23 @@ int validateRank(char rank[])
 
 int validateId(char id[])
 {
+    int i;
+    int count = 0;
+    
+    for (i = 0; i < 2; i++){
+        if (!isdigit(id[i])){
+            count++;
+        }
+    }
 
+    for (i = 2; i < 8; i++){
+        if (isdigit(id[i])){
+            count++;
+        }
+    }
+
+    if (count == 8) return 1;
+    else return 0;
 
 }
 
