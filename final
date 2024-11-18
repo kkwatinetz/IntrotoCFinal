@@ -14,6 +14,8 @@
 
 #define MAX_STUDENTS 100
 #define MAX_FACULTY 30
+#define TRUE 1
+#define FALSE 0
 
 
 
@@ -23,7 +25,6 @@ typedef struct
     char id[25];
     float gpa;
     int creditHours;
-
 } student;
 
 typedef struct
@@ -73,7 +74,7 @@ int menu() {
             printf("2 - Add a new student\n");
             printf("3 - Print tuition invoice for a student\n");
             printf("4 - Print information of a faculty member\n");
-            printf("0 - Exit Program\n");
+            printf("5 - Exit Program\n");
             firsttime++;
         }
         printf("\tEnter your selection:");
@@ -84,7 +85,7 @@ int menu() {
             option = -1; // Set option to an invalid value to stay in the loop
         }
 
-    } while (option > 4 || option < 0);
+    } while (option > 5 || option < 1);
 
     return option;
 }
@@ -179,26 +180,27 @@ int printFacultyInfo(faculty array[], const char *id)
 //---------------------------------------------------------------------
 void addNewStudent(student array[], student newStudent)
 {
-int i;
-
-    for (i = 0; i < MAX_STUDENTS; i++){
+    int i;
+    for (i = 0; i < MAX_STUDENTS; i++) {
         if (strcmp(array[i].id, "ZZ000000") == 0)
         {
             strcpy(array[i].name, newStudent.name);
             strcpy(array[i].id, newStudent.id);
             array[i].gpa = newStudent.gpa;
             array[i].creditHours = newStudent.creditHours;
+            break; // Exit the loop once the student is added
         }
     }
-
 }
 
 //---------------------------------------------------------------------
 void addNewFaculty(faculty *array, faculty *acc)
 {
     int index;
-    for (index = 0; index < 1000; index++) {
-        if ((array + index)->id == 0) {
+    for (index = 0; index < MAX_FACULTY; index++) 
+    {
+        if (strcmp((array + index)->id, "ZZ000000") == 0)
+        {
             break;
         }
     }
@@ -243,7 +245,7 @@ int validateDepartment(char department[])
 //---------------------------------------------------------------------
 int validateRank(char rank[])
 {
-    if(strcmp(rank, "ROFESSOR") == 0 || strcmp(rank, "ADJUNCT") == 0)
+    if(strcmp(rank, "PROFESSOR") == 0 || strcmp(rank, "ADJUNCT") == 0)
     {
         return 1;
     }
@@ -388,7 +390,7 @@ int main() {
                 newFaculty.name[strcspn(newFaculty.name, "\n")] = 0;
 
                 // Repeatedly ask for a valid ID
-                while (1) {
+                while (TRUE) {
                     printf("\tID: ");
                     scanf("%s", tempId);
                     if (validateId(tempId)) {
@@ -400,27 +402,34 @@ int main() {
                 }
 
                 // Repeatedly ask for a valid Rank
-                while (1) {
+                while (TRUE)
+                {
                     printf("\tRank: ");
-                    getchar();  // Clear buffer
+                    getchar();  // Clear buffer before reading rank
                     fgets(tempRank, sizeof(tempRank), stdin);
-                    tempRank[strcspn(tempRank, "\n")] = 0;
-                    if (validateRank(tempRank)) {
-                        toUpperCase(tempRank);
-                        strcpy(newFaculty.rank, tempRank);
+                    tempRank[strcspn(tempRank, "\n")] = 0;  // Ensure the newline is removed
+                    toUpperCase(tempRank);  // Convert to uppercase
+
+                    if (validateRank(tempRank))
+                    {
+                        strcpy(newFaculty.rank, tempRank);  // Store rank
                         break;  // Exit loop if rank is valid
-                    } else {
+                    }
+                    else
+                    {
                         printf("\t\tSorry entered rank %s is invalid. Try again.\n", tempRank);
                     }
                 }
 
                 // Repeatedly ask for a valid Department
-                while (1) {
+                while (TRUE) {
                     printf("\tDepartment: ");
                     fgets(tempDept, sizeof(tempDept), stdin);
                     tempDept[strcspn(tempDept, "\n")] = 0;
-                    if (validateDepartment(tempDept)) {
-                        toUpperCase(tempDept);
+                    toUpperCase(tempDept);
+
+                    if (validateDepartment(tempDept))
+                    {
                         strcpy(newFaculty.department, tempDept);
                         break;  // Exit loop if department is valid
                     } else {
@@ -441,7 +450,7 @@ int main() {
                 newStudent.name[strcspn(newStudent.name, "\n")] = 0;
 
                 // Repeatedly ask for a valid ID
-                while (1) {
+                while (TRUE) {
                     printf("\tID: ");
                     scanf("%s", tempId);
                     if (validateId(tempId)) {
@@ -453,7 +462,7 @@ int main() {
                 }
 
                 // Repeatedly ask for a valid GPA
-                while (1) {
+                while (TRUE) {
                     printf("\tGPA: ");
                     if (scanf("%f", &tempGpa) == 1 && tempGpa >= 0.0 && tempGpa <= 4.0) {
                         newStudent.gpa = tempGpa;
@@ -465,7 +474,7 @@ int main() {
                 }
 
                 // Repeatedly ask for valid credit hours
-                while (1) {
+                while (TRUE) {
                     printf("\tCredit hours: ");
                     if (scanf("%d", &tempCredits) == 1 && tempCredits >= 0) {
                         newStudent.creditHours = tempCredits;
@@ -481,16 +490,12 @@ int main() {
                 break;
 
             case 3:
-                 while (1)
+                 while (TRUE)
                  {
                     printf("Enter the student’s ID: ");
                     scanf("%s", tempId);
 
-                    if (!validateId(tempId))
-                    {
-                        printf("Invalid ID format. Please try again.\n");
-                    }
-                    else if (!printStudentInvoice(students, tempId))
+                    if (!printStudentInvoice(students, tempId))
                     {
                             printf("Sorry-student not found! Please try again.\n");
                     }
@@ -504,15 +509,13 @@ int main() {
                 break;
 
             case 4:
-                while (1)
+                while (TRUE)
                 {
                     printf("Enter the faculty’s ID: ");
                     scanf("%s", tempId);
 
-                    if (!validateId(tempId)) {
-                        printf("Invalid ID format. Please try again.\n");
-                    }
-                    else if (!printFacultyInfo(facultyMembers, tempId))
+
+                    if (!printFacultyInfo(facultyMembers, tempId))
                     {
                         printf("Sorry, faculty with ID %s does not exist. Please try again.\n", tempId);
                     }
@@ -520,7 +523,7 @@ int main() {
                     {
                         printf("Faculty found!\n");
                         printFacultyInfo(facultyMembers, tempId);
-                        break;  // Exit the loop once a valid ID is found
+                        break;
                     }
                 }
                 break;
