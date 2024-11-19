@@ -43,6 +43,7 @@ void setStudents(student array[]);
 void setFaculty(faculty array[]);
 void toUpperCase(char str[]);
 int printStudentInvoice(student array[], const char *id);
+int findStudent(student array[], const char *id);
 int printFacultyInfo(faculty array[], const char *id);
 void addNewStudent(student array[], student newStudent);
 void addNewFaculty(faculty *array, faculty *acc);
@@ -126,12 +127,14 @@ void toUpperCase(char str[])
 //---------------------------------------------------------------------
 int printStudentInvoice(student array[], const char *id)
 {
-    int found = 0;
-    for (int i = 0; i < MAX_STUDENTS; i++) {
-        if (strcmp(array[i].id, id) == 0) {
-            found = 1;
+    for (int i = 0; i < MAX_STUDENTS; i++)
+    {
+        if (strcmp(array[i].id, id) == 0)
+        {
+            // Calculate the total invoice for the student
             float totalInvoice = calculateStudentInvoice(array[i]);
 
+            // Print the student's invoice
             printf("\n-----------------------------------------------\n");
             printf("Student Name: %s\n", array[i].name);
             printf("Student ID: %s\n", array[i].id);
@@ -139,19 +142,34 @@ int printStudentInvoice(student array[], const char *id)
             printf("Credit Hours: %d\n", array[i].creditHours);
             printf("Cost per Credit Hour: $236.45\n");
             printf("Fees: $52.00\n");
-
             printf("\nTotal Invoice: $%.2f\n", totalInvoice);
             printf("-----------------------------------------------\n");
-            break;
+
+            return 1;
         }
     }
+}
 
-    // If student not found, print error message
-    if (!found) {
+//------------------------------------------------------------------
+int findStudent(student array[], const char *id)
+{
+    int found = 0;
+    for (int i = 0; i < MAX_STUDENTS; i++)
+    {
+        if (strcmp(array[i].id, id) == 0)
+        {
+            found = 1;
+        }
+        break;
+    }
+            // If student not found, print error message
+    if (!found)
+    {
         return 0;
     }
     return 1;
 }
+
 
 //---------------------------------------------------------------------
 int printFacultyInfo(faculty array[], const char *id)
@@ -490,21 +508,18 @@ int main() {
                 break;
 
             case 3:
-                 while (TRUE)
-                 {
-                    printf("Enter the student's ID: ");
-                    scanf("%s", tempId);
+                 printf("Enter the student's ID: ");
+                 scanf("%s", tempId);
 
-                    if (!printStudentInvoice(students, tempId))
-                    {
-                            printf("Sorry-student not found! Please try again.\n");
-                    }
-                    else
-                    {
-                        printf("Here is the tuition invoice for %s:\n", tempId);
-                        printStudentInvoice(students, tempId);
-                        break;
-                    }
+                if (!findStudent(students, tempId))
+                {
+                        printf("Sorry-student not found! Please try again.\n\n");
+                }
+                else
+                {
+                    printf("Here is the tuition invoice for %s:\n", tempId);
+                    printStudentInvoice(students, tempId);
+                    break;
                 }
                 break;
 
