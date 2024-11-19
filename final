@@ -197,7 +197,7 @@ void addNewStudent(student array[], student newStudent)
 void addNewFaculty(faculty *array, faculty *acc)
 {
     int index;
-    for (index = 0; index < MAX_FACULTY; index++) 
+    for (index = 0; index < MAX_FACULTY; index++)
     {
         if (strcmp((array + index)->id, "ZZ000000") == 0)
         {
@@ -382,7 +382,7 @@ int main() {
 
         switch (option) {
             case 1:
-                printf("Enter the faculty’s info:\n");
+                printf("Enter the faculty's info:\n");
 
                 printf("\tName of the faculty: ");
                 getchar();  // Clear buffer
@@ -405,19 +405,19 @@ int main() {
                 while (TRUE)
                 {
                     printf("\tRank: ");
-                    getchar();  // Clear buffer before reading rank
-                    fgets(tempRank, sizeof(tempRank), stdin);
-                    tempRank[strcspn(tempRank, "\n")] = 0;  // Ensure the newline is removed
-                    toUpperCase(tempRank);  // Convert to uppercase
+                    fgets(tempRank, sizeof(tempRank), stdin);  // Read input
+                    tempRank[strcspn(tempRank, "\n")] = 0;    // Remove trailing newline
 
-                    if (validateRank(tempRank))
+                    toUpperCase(tempRank);  // Convert input to uppercase before validation
+
+                    if (validateRank(tempRank))  // Check validity after conversion
                     {
-                        strcpy(newFaculty.rank, tempRank);  // Store rank
-                        break;  // Exit loop if rank is valid
+                        strcpy(newFaculty.rank, tempRank);  // Store the valid rank
+                        break;  // Exit the loop
                     }
                     else
                     {
-                        printf("\t\tSorry entered rank %s is invalid. Try again.\n", tempRank);
+                        printf("\t\tSorry entered rank '%s' is invalid. Try again.\n", tempRank);
                     }
                 }
 
@@ -442,7 +442,7 @@ int main() {
                 break;
 
             case 2:
-                printf("Enter student’s info:\n");
+                printf("Enter student's info:\n");
 
                 printf("\tName of student: ");
                 getchar();  // Clear buffer
@@ -492,7 +492,7 @@ int main() {
             case 3:
                  while (TRUE)
                  {
-                    printf("Enter the student’s ID: ");
+                    printf("Enter the student's ID: ");
                     scanf("%s", tempId);
 
                     if (!printStudentInvoice(students, tempId))
@@ -511,7 +511,7 @@ int main() {
             case 4:
                 while (TRUE)
                 {
-                    printf("Enter the faculty’s ID: ");
+                    printf("Enter the faculty's ID: ");
                     scanf("%s", tempId);
 
 
