@@ -407,7 +407,7 @@ int main() {
 
                 // Repeatedly ask for a valid ID
                 counter = 0;
-                while (TRUE && counter < 4)
+                while (TRUE && counter < 3)
                 {
                     counter++;
                     printf("\tID: ");
@@ -423,7 +423,7 @@ int main() {
 
                 // Repeatedly ask for a valid Rank
                 counter = 0;
-                while (TRUE && counter < 4)
+                while (TRUE && counter < 3)
                 {
                     counter++;
                     printf("\tRank: ");
@@ -457,7 +457,7 @@ int main() {
                 }
                 // Repeatedly ask for a valid Department
                 counter = 0;
-                while (TRUE && counter < 4)
+                while (TRUE && counter < 3)
                 {
                     counter++;
                     printf("\tDepartment: ");
@@ -488,7 +488,7 @@ int main() {
 
                 // Repeatedly ask for a valid ID
                 counter = 0;
-                while (TRUE && counter < 4)
+                while (TRUE && counter < 3)
                 {
                     counter++;
                     printf("\tID: ");
@@ -503,7 +503,7 @@ int main() {
 
                 // Repeatedly ask for a valid GPA
                 counter = 0;
-                while (TRUE && counter < 4)
+                while (TRUE && counter < 3)
                 {
                     counter++;
                     printf("\tGPA: ");
@@ -518,7 +518,7 @@ int main() {
 
                 // Repeatedly ask for valid credit hours
                 counter = 0;
-                while (TRUE && counter < 4)
+                while (TRUE && counter < 3)
                 {
                     counter++;
                     printf("\tCredit hours: ");
@@ -553,7 +553,7 @@ int main() {
 
             case 4:
                 counter = 0;
-                while (TRUE && counter < 4)
+                while (TRUE && counter < 3)
                 {
                     counter++;
                     printf("Enter the faculty's ID: ");
@@ -629,3 +629,4 @@ int main() {
 
     return 0;
 }
+
