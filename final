@@ -137,6 +137,8 @@ void printStudentInvoice(student array[], const char *id)
             float totalInvoice = calculateStudentInvoice(array[i]);
 
             // Print the student's invoice
+            printf("Here is the tuition invoice for %s:\n", array[i].name);
+
             printf("\n-----------------------------------------------\n");
             printf("Student Name: %s\n", array[i].name);
             printf("Student ID: %s\n", array[i].id);
@@ -584,7 +586,6 @@ int main() {
                 }
                 else
                 {
-                    printf("Here is the tuition invoice for %s:\n", newStudent.name);
                     printStudentInvoice(students, tempId);
                     break;
                 }
