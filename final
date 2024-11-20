@@ -75,7 +75,7 @@ int menu() {
             printf("2 - Add a new student\n");
             printf("3 - Print tuition invoice for a student\n");
             printf("4 - Print information of a faculty member\n");
-            printf("5 - Exit Program\n");
+            printf("5 - Exit Program\n\n");
             firsttime++;
         }
         printf("\tEnter your selection: ");
