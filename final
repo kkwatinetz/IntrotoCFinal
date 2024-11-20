@@ -66,7 +66,7 @@ int menu() {
     do {
         if (firsttime != 1)
         {
-            printf("\nInvalid entry- please try again.\n\n");
+            printf("\n\tInvalid entry- please try again.\n\n");
         }
         else
         {
