@@ -56,8 +56,8 @@ float calculateStudentInvoice(student s);
 int validateDepartment(char department[]);
 int validateRank(char rank[]);
 int validateId(char id[]);
-int validateFacultySort(char c);
-int validateStudentSort(char c);
+void printStudentList(student array[]);
+void printFacultyList(faculty array[]);
 int menu();
 
 //---------------------------------------------------------------------
@@ -137,8 +137,6 @@ void printStudentInvoice(student array[], const char *id)
             float totalInvoice = calculateStudentInvoice(array[i]);
 
             // Print the student's invoice
-            printf("Here is the tuition invoice for %s:\n", array[i].name);
-
             printf("\n-----------------------------------------------\n");
             printf("Student Name: %s\n", array[i].name);
             printf("Student ID: %s\n", array[i].id);
@@ -182,10 +180,8 @@ int printFacultyInfo(faculty array[], const char *id)
             found = 1;
 
             printf("\n-----------------------------------------------\n");
-            printf("Faculty Name: %s\n", array[i].name);
-            printf("Faculty ID: %s\n", array[i].id);
-            printf("Department: %s\n", array[i].department);
-            printf("Rank: %s\n", array[i].rank);
+            printf("%s\n", array[i].name);
+            printf("%s Department,%s \n", array[i].department, array[i].rank);
             printf("-----------------------------------------------\n");
             break;
         }
@@ -201,6 +197,7 @@ int printFacultyInfo(faculty array[], const char *id)
 void addNewStudent(student array[], student newStudent)
 {
     int i;
+    toUpperCase(newStudent.name);
     for (i = 0; i < MAX_STUDENTS; i++) {
         if (strcmp(array[i].id, "ZZ000000") == 0)
         {
@@ -217,15 +214,16 @@ void addNewStudent(student array[], student newStudent)
 void addNewFaculty(faculty *array, faculty *acc)
 {
     int index;
+    toUpperCase(acc->name);
     for (index = 0; index < MAX_FACULTY; index++)
     {
-        if (strcmp((array + index)->id, "ZZ000000") == 0)
+        if (strcmp((array + index)->name, "ZZZZZZZZZZZZZ") == 0) // Check for empty slot by name
         {
             break;
         }
     }
 
-    if (index < 30) {
+    if (index < MAX_FACULTY) {
         strcpy((array + index)->name, acc->name);
         strcpy((array + index)->rank, acc->rank);
         strcpy((array + index)->department, acc->department);
@@ -278,22 +276,6 @@ int validateRank(char rank[])
         return 0;
     }
 
-}
-
-//---------------------------------------------------------------------
-int validateFacultySort(char c){
-    toUpperCase(&c);
-
-    if (strcmp (&c, "N") == 0 && strcmp (&c, "D") == 0 && strcmp (&c, "R") == 0) return 1;
-    else return 0;
-}
-
-//---------------------------------------------------------------------
-int validateStudentSort(char c){
-    toUpperCase(&c);
-
-    if (strcmp (&c, "N") == 0 && strcmp (&c, "G") == 0) return 1;
-    else return 0;
 }
 
 //---------------------------------------------------------------------
@@ -400,6 +382,26 @@ void sortByGPA(student array[])
     }
 
 }
+//---------------------------------------------------------------------
+void printStudentList(student array[])
+{
+    for (int i = 0; i < MAX_STUDENTS; i++) {
+        if (strcmp(array[i].id, "ZZ000000") != 0) { // Check valid entries
+            printf("\t\t\t%s (GPA = %.2f)\n",array[i].name, array[i].gpa);
+        }
+    }
+}
+
+
+//---------------------------------------------------------------------
+void printFacultyList(faculty array[])
+{
+    for (int i = 0; i < MAX_FACULTY; i++) {
+        if (strcmp(array[i].id, "ZZ000000") != 0) { // Check valid entries
+            printf("\t\t\t%s - %s\n",array[i].name,array[i].department);
+        }
+    }
+}
 
 //---------------------------------------------------------------------
 int main() {
@@ -462,7 +464,7 @@ int main() {
                         char enterRank[20];
                         tempRank[strcspn(tempRank, "\n")] = 0;
                         strcpy(enterRank, tempRank);
-                        
+
 
                         if (strlen(tempRank) == 0)  // Check if input is empty
                         {
@@ -497,20 +499,20 @@ int main() {
                     fgets(tempDept, sizeof(tempDept), stdin);
                     tempDept[strcspn(tempDept, "\n")] = 0;
                     char enterDept[20];
-                    strcpy(enterDept, tempDept);
-                    
+                    strcpy(enterDept, tempRank);
+
 
                     if (validateDepartment(tempDept))
                     {
                         strcpy(newFaculty.department, tempDept);
                         break;  // Exit loop if department is valid
                     } else {
-                        printf("\t\tSorry entered department (%s) is invalid. Try again.\n", enterDept);
+                        printf("\t\tSorry entered department %s is invalid. Try again.\n", enterDept);
                     }
                     counter++;
                 }
                 if(counter == 3) goto jeff;
-                
+
 
                 addNewFaculty(facultyMembers, &newFaculty);
                 printf("Thanks!\n\n");
@@ -586,6 +588,7 @@ int main() {
                 }
                 else
                 {
+                    printf("Here is the tuition invoice for %s:\n", newStudent.name);
                     printStudentInvoice(students, tempId);
                     break;
                 }
@@ -597,7 +600,7 @@ int main() {
 
                 if (!printFacultyInfo(facultyMembers, tempId))
                 {
-                    printf("Sorry, faculty with ID %s does not exist. \n\n", tempId);
+                    printf("Sorry, %s does not exist. \n\n", tempId);
                 }
                 else
                 {
@@ -613,32 +616,12 @@ int main() {
                 scanf("%c", &printReport);
                 printReport = toupper(printReport);
                 if (printReport == 'Y') {
-                    /*printf("Enter\n");
+                    printf("Enter\n");
                     printf("N or n to sort the faculty by name\n");
                     printf("D or d to sort the faculty by department\n");
                     printf("R or r to sort the faculty by rank\n");
                     getchar();  // Clear buffer
-                    scanf("%c", &sortFaculty);*/
-
-                    counter = 0;
-                    while (TRUE && counter < 3)
-                    {
-                        printf("Enter\n");
-                        printf("N or n to sort the faculty by name\n");
-                        printf("D or d to sort the faculty by department\n");
-                        printf("R or r to sort the faculty by rank\n");
-                        getchar();  // Clear buffer
-                        scanf("%c", &sortFaculty);
-                            if (validateFacultySort(sortFaculty)) {
-                                //strcpy(newStudent.id, sortFaculty);
-                                break;
-                            } else {
-                                printf("\tInvalid ID format. Please enter a valid ID.\n");
-                            }
-                        counter++;
-                    }
-                    if(counter == 3) goto jeff;
-
+                    scanf("%c", &sortFaculty);
                     sortFaculty = toupper(sortFaculty);
                     if (sortFaculty == 'N') {
                         sortByFName(facultyMembers);
@@ -664,16 +647,12 @@ int main() {
                         printf("Invalid input for student sort.\n");
                     }
 
-                    printf("\nHere is your report...");
+                    printf("Here is your report...\n");
                     printf("\t------    L I S T   O F   F A C U L T Y  -----\n");
-                    for (int i = 0; i < MAX_FACULTY && strcmp(facultyMembers[i].id, "ZZ000000") != 0; i++) {
-                        printf("\t\t%s - %s\n", facultyMembers[i].name, facultyMembers[i].department);
-                    }
+                    printFacultyList(facultyMembers);
 
                     printf("\t------    L I S T   O F   S T U D E N T S  -----\n");
-                    for (int i = 0; i < MAX_STUDENTS && strcmp(students[i].id, "ZZ000000") != 0; i++) {
-                        printf("\t\t%s (GPA = %.2f)\n", students[i].name, students[i].gpa);
-                    }
+                    printStudentList(students);
                     printf("Thank you for using PerPro. Goodbye!\n");
                 } else {
                     printf("Thank you for using PerPro. Goodbye!\n");
