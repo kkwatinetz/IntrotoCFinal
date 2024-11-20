@@ -56,6 +56,8 @@ float calculateStudentInvoice(student s);
 int validateDepartment(char department[]);
 int validateRank(char rank[]);
 int validateId(char id[]);
+int validateFacultySort(char c);
+int validateStudentSort(char c);
 int menu();
 
 //---------------------------------------------------------------------
@@ -277,6 +279,22 @@ int validateRank(char rank[])
 }
 
 //---------------------------------------------------------------------
+int validateFacultySort(char c){
+    toUpperCase(&c);
+
+    if (strcmp (&c, "N") == 0 && strcmp (&c, "D") == 0 && strcmp (&c, "R") == 0) return 1;
+    else return 0;
+}
+
+//---------------------------------------------------------------------
+int validateStudentSort(char c){
+    toUpperCase(&c);
+
+    if (strcmp (&c, "N") == 0 && strcmp (&c, "G") == 0) return 1;
+    else return 0;
+}
+
+//---------------------------------------------------------------------
 int validateId(char id[])
 {
     int i;
@@ -477,7 +495,7 @@ int main() {
                     fgets(tempDept, sizeof(tempDept), stdin);
                     tempDept[strcspn(tempDept, "\n")] = 0;
                     char enterDept[20];
-                    strcpy(enterDept, tempRank);
+                    strcpy(enterDept, tempDept);
                     
 
                     if (validateDepartment(tempDept))
@@ -485,7 +503,7 @@ int main() {
                         strcpy(newFaculty.department, tempDept);
                         break;  // Exit loop if department is valid
                     } else {
-                        printf("\t\tSorry entered department %s is invalid. Try again.\n", enterDept);
+                        printf("\t\tSorry entered department (%s) is invalid. Try again.\n", enterDept);
                     }
                     counter++;
                 }
@@ -594,12 +612,32 @@ int main() {
                 scanf("%c", &printReport);
                 printReport = toupper(printReport);
                 if (printReport == 'Y') {
-                    printf("Enter\n");
+                    /*printf("Enter\n");
                     printf("N or n to sort the faculty by name\n");
                     printf("D or d to sort the faculty by department\n");
                     printf("R or r to sort the faculty by rank\n");
                     getchar();  // Clear buffer
-                    scanf("%c", &sortFaculty);
+                    scanf("%c", &sortFaculty);*/
+
+                    counter = 0;
+                    while (TRUE && counter < 3)
+                    {
+                        printf("Enter\n");
+                        printf("N or n to sort the faculty by name\n");
+                        printf("D or d to sort the faculty by department\n");
+                        printf("R or r to sort the faculty by rank\n");
+                        getchar();  // Clear buffer
+                        scanf("%c", &sortFaculty);
+                            if (validateFacultySort(sortFaculty)) {
+                                //strcpy(newStudent.id, sortFaculty);
+                                break;
+                            } else {
+                                printf("\tInvalid ID format. Please enter a valid ID.\n");
+                            }
+                        counter++;
+                    }
+                    if(counter == 3) goto jeff;
+
                     sortFaculty = toupper(sortFaculty);
                     if (sortFaculty == 'N') {
                         sortByFName(facultyMembers);
@@ -625,7 +663,7 @@ int main() {
                         printf("Invalid input for student sort.\n");
                     }
 
-                    printf("Here is your report...");
+                    printf("\nHere is your report...");
                     printf("\t------    L I S T   O F   F A C U L T Y  -----\n");
                     for (int i = 0; i < MAX_FACULTY && strcmp(facultyMembers[i].id, "ZZ000000") != 0; i++) {
                         printf("\t\t%s - %s\n", facultyMembers[i].name, facultyMembers[i].department);
