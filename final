@@ -70,7 +70,7 @@ int menu() {
         }
         else
         {
-            printf("Choose one of the following options: \n");
+            printf("\n\nChoose one of the options: \n");
             printf("1 - Add a new faculty member\n");
             printf("2 - Add a new student\n");
             printf("3 - Print tuition invoice for a student\n");
@@ -78,7 +78,7 @@ int menu() {
             printf("5 - Exit Program\n");
             firsttime++;
         }
-        printf("\tEnter your selection:");
+        printf("\tEnter your selection: ");
         if (scanf("%d", &option) != 1)
         {
             // Clear invalid input from buffer
@@ -402,7 +402,7 @@ int main() {
         int counter = 0;
         switch (option) {
             case 1:
-                printf("Enter the faculty's info:\n");
+                printf("\nEnter the faculty's info:\n");
 
                 printf("\tName of the faculty: ");
                 getchar();  // Clear buffer
@@ -490,7 +490,7 @@ int main() {
                 break;
 
             case 2:
-                printf("Enter student's info:\n");
+                printf("\nEnter student's info:\n");
 
                 printf("\tName of student: ");
                 getchar();  // Clear buffer
