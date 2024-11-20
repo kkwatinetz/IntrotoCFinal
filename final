@@ -247,6 +247,8 @@ float calculateStudentInvoice(student s)
 //---------------------------------------------------------------------
 int validateDepartment(char department[])
 {
+    toUpperCase(department);
+
     if(strcmp(department, "MATH") == 0 || strcmp(department, "CS") == 0 || strcmp(department, "SCIENCE") == 0)
     {
         return 1;
@@ -262,7 +264,7 @@ int validateDepartment(char department[])
 int validateRank(char rank[])
 {
     toUpperCase(rank);
-    
+
     if(strcmp(rank, "PROFESSOR") == 0 || strcmp(rank, "ADJUNCT") == 0)
     {
         return 1;
@@ -450,7 +452,6 @@ int main() {
 
                         if (validateRank(tempRank))  // Validate the rank
                         {
-                            toUpperCase(tempRank);
                             strcpy(newFaculty.rank, tempRank);  // Store the valid rank
                             break;  // Exit the loop
                         }
@@ -475,14 +476,16 @@ int main() {
                     printf("\tDepartment: ");
                     fgets(tempDept, sizeof(tempDept), stdin);
                     tempDept[strcspn(tempDept, "\n")] = 0;
-                    toUpperCase(tempDept);
+                    char enterDept[20];
+                    strcpy(enterDept, tempRank);
+                    
 
                     if (validateDepartment(tempDept))
                     {
                         strcpy(newFaculty.department, tempDept);
                         break;  // Exit loop if department is valid
                     } else {
-                        printf("\t\tSorry entered department %s is invalid. Try again.\n", tempDept);
+                        printf("\t\tSorry entered department %s is invalid. Try again.\n", enterDept);
                     }
                     counter++;
                 }
