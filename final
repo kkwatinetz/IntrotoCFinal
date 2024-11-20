@@ -70,7 +70,7 @@ int menu() {
         }
         else
         {
-            printf("\n\nChoose one of the options: \n");
+            printf("\n\nChoose one of the options: \n\n");
             printf("1 - Add a new faculty member\n");
             printf("2 - Add a new student\n");
             printf("3 - Print tuition invoice for a student\n");
@@ -261,6 +261,8 @@ int validateDepartment(char department[])
 //---------------------------------------------------------------------
 int validateRank(char rank[])
 {
+    toUpperCase(rank);
+    
     if(strcmp(rank, "PROFESSOR") == 0 || strcmp(rank, "ADJUNCT") == 0)
     {
         return 1;
@@ -402,7 +404,7 @@ int main() {
         int counter = 0;
         switch (option) {
             case 1:
-                printf("\nEnter the faculty's info:\n");
+                printf("\n\nEnter the faculty's info:\n");
 
                 printf("\tName of the faculty: ");
                 getchar();  // Clear buffer
@@ -435,7 +437,10 @@ int main() {
                     fflush(stdin); // Clear the input buffer
                     if (fgets(tempRank, sizeof(tempRank), stdin))
                     {
-                        tempRank[strcspn(tempRank, "\n")] = 0; // Remove trailing newline
+                        char enterRank[20];
+                        tempRank[strcspn(tempRank, "\n")] = 0;
+                        strcpy(enterRank, tempRank);
+                        
 
                         if (strlen(tempRank) == 0)  // Check if input is empty
                         {
@@ -443,16 +448,15 @@ int main() {
                             continue;
                         }
 
-                        toUpperCase(tempRank);  // Convert input to uppercase
-
                         if (validateRank(tempRank))  // Validate the rank
                         {
+                            toUpperCase(tempRank);
                             strcpy(newFaculty.rank, tempRank);  // Store the valid rank
                             break;  // Exit the loop
                         }
                         else
                         {
-                                printf("\n\t\tSorry, entered rank (%s) is invalid. Try again.\n", tempRank);
+                                printf("\n\t\tSorry, entered rank (%s) is invalid. Try again.\n", enterRank);
                         }
                     }
                     else
@@ -490,7 +494,7 @@ int main() {
                 break;
 
             case 2:
-                printf("\nEnter student's info:\n");
+                printf("\n\nEnter student's info:\n");
 
                 printf("\tName of student: ");
                 getchar();  // Clear buffer
@@ -559,7 +563,7 @@ int main() {
                 }
                 else
                 {
-                    printf("Here is the tuition invoice for %s:\n", tempId);
+                    printf("Here is the tuition invoice for %s:\n", newStudent.name);
                     printStudentInvoice(students, tempId);
                     break;
                 }
