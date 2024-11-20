@@ -618,14 +618,15 @@ int main() {
                         printf("Invalid input for student sort.\n");
                     }
 
-                    printf("------    L I S T   O F   F A C U L T Y  -----\n");
+                    printf("Here is your report...");
+                    printf("\t------    L I S T   O F   F A C U L T Y  -----\n");
                     for (int i = 0; i < MAX_FACULTY && strcmp(facultyMembers[i].id, "ZZ000000") != 0; i++) {
-                        printf("Name: %s, ID: %s, Department: %s, Rank: %s\n", facultyMembers[i].name, facultyMembers[i].id, facultyMembers[i].department, facultyMembers[i].rank);
+                        printf("\t\t%s - %s\n", facultyMembers[i].name, facultyMembers[i].department);
                     }
 
-                    printf("------    L I S T   O F   S T U D E N T S  -----\n");
+                    printf("\t------    L I S T   O F   S T U D E N T S  -----\n");
                     for (int i = 0; i < MAX_STUDENTS && strcmp(students[i].id, "ZZ000000") != 0; i++) {
-                        printf("Name: %s, ID: %s, GPA: %.2f\n", students[i].name, students[i].id, students[i].gpa);
+                        printf("\t\t%s (GPA = %.2f)\n", students[i].name, students[i].gpa);
                     }
                     printf("Thank you for using PerPro. Goodbye!\n");
                 } else {
