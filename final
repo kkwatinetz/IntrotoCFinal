@@ -550,12 +550,12 @@ int main() {
                 break;
 
             case 3:
-                 printf("Enter the student's ID: ");
-                 scanf("%s", tempId);
+                printf("Enter the student's ID: ");
+                scanf("%s", tempId);
 
                 if (!findStudent(students, tempId))
                 {
-                        printf("Sorry-student not found! Please try again.\n\n");
+                    printf("Sorry-student not found!\n\n");
                 }
                 else
                 {
@@ -566,26 +566,19 @@ int main() {
                 break;
 
             case 4:
-                counter = 0;
-                while (TRUE && counter < 3)
+                printf("Enter the faculty's ID: ");
+                scanf("%s", tempId);
+
+                if (!printFacultyInfo(facultyMembers, tempId))
                 {
-                    printf("Enter the faculty's ID: ");
-                    scanf("%s", tempId);
-
-
-                    if (!printFacultyInfo(facultyMembers, tempId))
-                    {
-                        printf("\nSorry, faculty with ID %s does not exist. Please try again.\n", tempId);
-                    }
-                    else
-                    {
-                        printf("Faculty found!\n");
-                        printFacultyInfo(facultyMembers, tempId);
-                        break;
-                    }
-                    counter++; 
+                    printf("Sorry, faculty with ID %s does not exist. \n\n", tempId);
                 }
-                if(counter == 3) goto jeff;
+                else
+                {
+                    printf("Faculty found!\n");
+                    printFacultyInfo(facultyMembers, tempId);
+                    break;
+                }
                 break;
 
             case 5:
