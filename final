@@ -278,9 +278,13 @@ int validateId(char id[])
     int i;
     int count = 0;
 
+    if (strlen(id) > 8) return 0;
+
     for (i = 0; i < 2; i++){
         if (!isdigit(id[i])){
             count++;
+        } else{
+            return 0;
         }
     }
 
@@ -409,7 +413,6 @@ int main() {
                 counter = 0;
                 while (TRUE && counter < 3)
                 {
-                    counter++;
                     printf("\tID: ");
                     scanf("%s", tempId);
                     if (validateId(tempId))
@@ -419,13 +422,15 @@ int main() {
                     } else {
                         printf("\tInvalid ID format. Please enter a valid ID.\n");
                     }
+                    counter++;
                 }
+
+                if(counter == 3) goto jeff;
 
                 // Repeatedly ask for a valid Rank
                 counter = 0;
                 while (TRUE && counter < 3)
                 {
-                    counter++;
                     printf("\tRank: ");
                     fflush(stdin); // Clear the input buffer
                     if (fgets(tempRank, sizeof(tempRank), stdin))
@@ -447,19 +452,22 @@ int main() {
                         }
                         else
                         {
-                                printf("\n\t\tSorry, entered rank '%s' is invalid. Try again.\n", tempRank);
+                                printf("\n\t\tSorry, entered rank (%s) is invalid. Try again.\n", tempRank);
                         }
                     }
                     else
                     {
                         printf("\n\t\tError reading input. Try again.\n");
                     }
+                    counter++;
                 }
+                if(counter == 3) goto jeff;
+
+
                 // Repeatedly ask for a valid Department
                 counter = 0;
                 while (TRUE && counter < 3)
                 {
-                    counter++;
                     printf("\tDepartment: ");
                     fgets(tempDept, sizeof(tempDept), stdin);
                     tempDept[strcspn(tempDept, "\n")] = 0;
@@ -472,7 +480,10 @@ int main() {
                     } else {
                         printf("\t\tSorry entered department %s is invalid. Try again.\n", tempDept);
                     }
+                    counter++;
                 }
+                if(counter == 3) goto jeff;
+                
 
                 addNewFaculty(facultyMembers, &newFaculty);
                 printf("Thanks!\n\n");
@@ -490,7 +501,6 @@ int main() {
                 counter = 0;
                 while (TRUE && counter < 3)
                 {
-                    counter++;
                     printf("\tID: ");
                     scanf("%s", tempId);
                     if (validateId(tempId)) {
@@ -499,13 +509,14 @@ int main() {
                     } else {
                         printf("\tInvalid ID format. Please enter a valid ID.\n");
                     }
+                    counter++;
                 }
+                if(counter == 3) goto jeff;
 
                 // Repeatedly ask for a valid GPA
                 counter = 0;
                 while (TRUE && counter < 3)
                 {
-                    counter++;
                     printf("\tGPA: ");
                     if (scanf("%f", &tempGpa) == 1 && tempGpa >= 0.0 && tempGpa <= 4.0) {
                         newStudent.gpa = tempGpa;
@@ -514,13 +525,14 @@ int main() {
                         printf("\tInvalid GPA. Please enter a valid GPA (0.0 - 4.0).\n");
                         while (getchar() != '\n');  // Clear buffer
                     }
+                    counter++;
                 }
+                if(counter == 3) goto jeff;
 
                 // Repeatedly ask for valid credit hours
                 counter = 0;
                 while (TRUE && counter < 3)
                 {
-                    counter++;
                     printf("\tCredit hours: ");
                     if (scanf("%d", &tempCredits) == 1 && tempCredits >= 0) {
                         newStudent.creditHours = tempCredits;
@@ -529,7 +541,9 @@ int main() {
                         printf("\tInvalid credit hours. Please enter a valid number of credit hours.\n");
                         while (getchar() != '\n');  // Clear buffer
                     }
+                    counter++;
                 }
+                if(counter == 3) goto jeff;
 
                 addNewStudent(students, newStudent);
                 printf("Thanks!\n\n");
@@ -555,7 +569,6 @@ int main() {
                 counter = 0;
                 while (TRUE && counter < 3)
                 {
-                    counter++;
                     printf("Enter the faculty's ID: ");
                     scanf("%s", tempId);
 
@@ -570,7 +583,9 @@ int main() {
                         printFacultyInfo(facultyMembers, tempId);
                         break;
                     }
+                    counter++; 
                 }
+                if(counter == 3) goto jeff;
                 break;
 
             case 5:
@@ -627,6 +642,8 @@ int main() {
         }
     }
 
+    jeff:
+        printf("You've tried too many times...\nThank you for using PerPro. Goodbye!\n");
+
     return 0;
 }
-
