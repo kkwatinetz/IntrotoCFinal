@@ -148,7 +148,7 @@ void printStudentInvoice(student array[], const char *id)
             if (array[i].gpa >= 3.85)
             {
                 float discount = ((array[i].creditHours * 236.45) + 52) - totalInvoice;
-                printf("\t\t($%f discount applied)\n", discount);
+                printf("\t\t($%.2f discount applied)\n", discount);
             }
             else
             {
