@@ -513,7 +513,10 @@ int main() {
                     counter++;
                 }
 
-                if(counter == 3) jeff();
+                if(counter == 3) {
+                    jeff();
+                    goto end;
+                }
 
                 // Repeatedly ask for a valid Rank
                 counter = 0;
@@ -550,7 +553,10 @@ int main() {
                     }
                     counter++;
                 }
-                if(counter == 3) jeff();
+                if(counter == 3) {
+                    jeff();
+                    goto end;
+                }
 
 
                 // Repeatedly ask for a valid Department
@@ -573,7 +579,10 @@ int main() {
                     }
                     counter++;
                 }
-                if(counter == 3) jeff();
+                if(counter == 3) {
+                    jeff();
+                    goto end;
+                }
 
 
                 addNewFaculty(facultyMembers, &newFaculty);
@@ -607,7 +616,10 @@ int main() {
                     }
                     counter++;
                 }
-                if(counter == 3) jeff();
+                if(counter == 3) {
+                    jeff();
+                    goto end;
+                }
 
                 // Repeatedly ask for a valid GPA
                 counter = 0;
@@ -623,7 +635,10 @@ int main() {
                     }
                     counter++;
                 }
-                if(counter == 3) jeff();
+                if(counter == 3) {
+                    jeff();
+                    goto end;
+                }
 
                 // Repeatedly ask for valid credit hours
                 counter = 0;
@@ -639,7 +654,10 @@ int main() {
                     }
                     counter++;
                 }
-                if(counter == 3) jeff();
+                if(counter == 3) {
+                    jeff();
+                    goto end;
+                }
 
                 addNewStudent(students, newStudent);
                 printf("Thanks!\n\n");
@@ -775,5 +793,6 @@ int main() {
         }
     }
 
-    return 0;
+    end: 
+        return 0;
 }
