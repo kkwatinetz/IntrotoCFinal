@@ -506,9 +506,14 @@ int main() {
                         }
                         strcpy(newFaculty.id, tempId);
                         break;  // Exit loop if ID is valid
-                    } else
+                    }
+                    else if (counter >= 0 && counter < 2)
                     {
                         printf("\tInvalid ID format. Please enter a valid ID.\n");
+                    }
+                    else
+                    {
+                        printf("");
                     }
                     counter++;
                 }
@@ -542,9 +547,13 @@ int main() {
                             strcpy(newFaculty.rank, tempRank);  // Store the valid rank
                             break;  // Exit the loop
                         }
-                        else
+                        else if (counter >= 0 && counter < 2)
                         {
                                 printf("\n\t\tSorry, entered rank (%s) is invalid. Try again.\n", enterRank);
+                        }
+                        else
+                        {
+                            printf("");
                         }
                     }
                     else
@@ -574,8 +583,14 @@ int main() {
                     {
                         strcpy(newFaculty.department, tempDept);
                         break;  // Exit loop if department is valid
-                    } else {
+                    }
+                    else if (counter >= 0 && counter < 2)
+                    {
                         printf("\t\tSorry entered department %s is invalid. Try again.\n", enterDept);
+                    }
+                    else
+                    {
+                        printf("");
                     }
                     counter++;
                 }
@@ -611,8 +626,14 @@ int main() {
                         }
                         strcpy(newStudent.id, tempId);
                         break;  // Exit loop if ID is valid
-                    } else {
+                    }
+                    else if (counter >= 0 && counter < 2)
+                    {
                         printf("\tInvalid ID format. Please enter a valid ID.\n");
+                    }
+                    else
+                    {
+                        printf("");
                     }
                     counter++;
                 }
@@ -629,9 +650,15 @@ int main() {
                     if (scanf("%f", &tempGpa) == 1 && tempGpa >= 0.0 && tempGpa <= 4.0) {
                         newStudent.gpa = tempGpa;
                         break;  // Exit loop if GPA is valid
-                    } else {
+                    }
+                    else if (counter >= 0 && counter < 2)
+                    {
                         printf("\tInvalid GPA. Please enter a valid GPA (0.0 - 4.0).\n");
                         while (getchar() != '\n');  // Clear buffer
+                    }
+                    else
+                    {
+                        printf("");
                     }
                     counter++;
                 }
@@ -648,9 +675,15 @@ int main() {
                     if (scanf("%d", &tempCredits) == 1 && tempCredits >= 0) {
                         newStudent.creditHours = tempCredits;
                         break;  // Exit loop if credit hours are valid
-                    } else {
+                    }
+                    else if (counter >= 0 && counter < 2)
+                    {
                         printf("\tInvalid credit hours. Please enter a valid number of credit hours.\n");
                         while (getchar() != '\n');  // Clear buffer
+                    }
+                    else
+                    {
+                        printf("");
                     }
                     counter++;
                 }
@@ -786,13 +819,14 @@ int main() {
 
                     printf("Thank you for using PerPro. Goodbye!\n");
                 }
-                else {
+                else
+                {
                     printf("Thank you for using PerPro. Goodbye!\n");
                 }
                 break;
         }
     }
 
-    end: 
+    end:
         return 0;
 }
